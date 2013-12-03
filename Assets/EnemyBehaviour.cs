@@ -16,8 +16,7 @@ public class EnemyBehaviour : MonoBehaviour {
 		rigidbody2D.velocity = velocity;
 	}
 	void OnCollisionEnter2D(Collision2D collision){
-		if(collision.gameObject.name=="Enemy(Clone)"){
-			collision.collider.
-
+		Physics2D.IgnoreLayerCollision (8, 8, true);
+		Destroy (gameObject);
 	}
 }
