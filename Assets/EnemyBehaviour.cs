@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		velocityTowardsPlanet();
+		this.transform.LookAt(new Vector3(0,0,0), Vector3.back);
 	}
 	
 	void velocityTowardsPlanet() {
