@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Player : MonoBehaviour {
-	public long population = 8000000000;
-	private float populationGrowth = 1/1600000000;
+	public double population = 8000000000;
+	private double populationGrowth = 1600000000;
 
 
 	// Use this for initialization
@@ -16,20 +16,16 @@ public class Player : MonoBehaviour {
 		if (!IsInvoking ()) {
 			Invoke ("addPopulation", 1);
 		}
-		
-	
+
 	}
 	void addPopulation(){
-		population += (long)(population * populationGrowth* Random.Range(1/2, 2));
+		population += (population / populationGrowth) * 0.1 * (double) Random.Range(5, 20);
 	}
-	void onCollisionEnter2D(Collision collision){
-		population-=Random.Range(50000000, 100000000);
+	void OnCollisionEnter2D(Collision2D collision){
+		population-=  Random.Range(50000000, 100000000);
 
 	}
 	void OnGUI(){
-
-
-		GUI.Label (new Rect (Screen.height, 0, Screen.width-Screen.height, 10), population.ToString ());
-
+		GUI.Label (new Rect (Screen.height, 10, Screen.width-Screen.height, 50), ((long)population).ToString());
 	}
 }

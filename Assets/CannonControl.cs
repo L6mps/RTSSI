@@ -8,6 +8,8 @@ public class CannonControl : MonoBehaviour {
 	public GameObject projectile;
 	public static float angle2=0;
 	public float mouseAngle=0;
+	private float maxAngle;
+	private float minAngle;
 
 
 	public static float getAngle(){
@@ -16,6 +18,18 @@ public class CannonControl : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		float objectAngle;
+		float radius=Mathf.Sqrt (Mathf.Pow (transform.position.x,2)+Mathf.Pow (transform.position.y,2));
+		if(transform.position.y<0){
+			objectAngle=-(Mathf.Asin((transform.position.x)/radius)+Mathf.PI);
+		}
+		else if(transform.position.y>=0){
+			objectAngle=Mathf.Asin((transform.position.x)/radius);
+		}
+		objectAngle=Mathf.Rad2Deg*mouseAngle;
+		maxAngle=objectAngle +75;
+		minAngle=objectAngle-85;
+
 	}
 	
 	// Update is called once per frame
@@ -33,8 +47,10 @@ public class CannonControl : MonoBehaviour {
 				mouseAngle=Mathf.Asin((mouse.x-oobject.x)/mouseRadius);
 			}
 			mouseAngle=Mathf.Rad2Deg*mouseAngle;
-			transform.Rotate(0,0,angle-mouseAngle);
-			angle=mouseAngle;
+			if(mouseAngle<maxAngle && mouseAngle>minAngle){
+				transform.Rotate(0,0,angle-mouseAngle);
+				angle=mouseAngle;
+			}
 			if(angle>=360){
 				angle-=360;
 			}

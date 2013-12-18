@@ -20,14 +20,18 @@ public class Spawner : MonoBehaviour {
 		newPosition.y = 0;
 		newPosition.x = 384;
 		float angle = 0;
+		Transform tran =transform;
+		tran.Rotate (0,0,-90);
 		for(int i=0;i<10;i++){
-			slots[i]=(GameObject)Instantiate (slot,newPosition,transform.rotation);
+			slots[i]=(GameObject)Instantiate (slot,newPosition,tran.rotation);
           slots[i].transform.position=newPosition;
-          slots[i].transform.rotation=transform.rotation;
+          slots[i].transform.rotation=tran.rotation;
           angle+=36;
           newPosition.x=384*Mathf.Cos (angle*Mathf.Deg2Rad);
           newPosition.y=384*Mathf.Sin ((angle)*Mathf.Deg2Rad);
+			tran.Rotate (0,0,36);
   		}
+		tran.Rotate (0,0,90);
 
 	
 	}
@@ -54,9 +58,9 @@ public class Spawner : MonoBehaviour {
 										}
 										if (isThereACannon == 0) {
 												cannons [cannonCount] = (GameObject)Instantiate
-												(cannon, slots[i].transform.position, transform.rotation);
+												(cannon, slots[i].transform.position, slots[i].transform.rotation);
 												cannons [cannonCount].transform.position = slots [i].transform.position;
-												cannons [cannonCount].transform.rotation = transform.rotation;
+												cannons [cannonCount].transform.rotation = slots[i].transform.rotation;
 												cannons [cannonCount].name = cannons [cannonCount].name + cannonCount;
 												cannonCount++;
 										} else {
