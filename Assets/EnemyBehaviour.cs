@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour {
 	public float speed = 0.5f;
+	public GameObject explosion;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,7 @@ public class EnemyBehaviour : MonoBehaviour {
 	}
 	void OnCollisionEnter2D(Collision2D collision){
 		Physics2D.IgnoreLayerCollision (8, 8, true);
+		Instantiate (explosion,transform.position,transform.rotation);
 		Destroy (gameObject);
 	}
 }

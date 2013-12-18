@@ -6,20 +6,28 @@ public class MothershipSpawner : MonoBehaviour {
 	public float offset = 100f;
 	public float mothershipSpawnDelay = 15f;
 	public float relocateDelay = 60f;
-	public int maxMotherships = 4;
-	private int mothershipsLeft;
+	//public int maxMotherships = 4;
+	//private int mothershipsLeft;
+	private int health=20;
+	public float speed=10;
+	private float radius;
 
 	void Start() {
-		mothershipsLeft = maxMotherships;
+		//mothershipsLeft = maxMotherships;
+		radius=Mathf.Sqrt (Mathf.Pow (transform.position.x,2)+Mathf.Pow (transform.position.y,2));
 	}
 
 	void Update () {
-		if(!IsInvoking()&&mothershipsLeft > 0)
+		if(!IsInvoking())
 			Invoke ("SpawnMothership", mothershipSpawnDelay);
 		//debug code, s for mothership
 		if(Input.GetKeyUp("s")) {
 			SpawnMothership ();
 		}
+		orbit ();
+	}
+	void orbit(){
+		transform.position=Quaternion.Euler (0,0,1*Time.deltaTime*speed)*transform.position;
 	}
 
 	void SpawnMothership() {
@@ -28,9 +36,9 @@ public class MothershipSpawner : MonoBehaviour {
 		newPos.x += offset*newRand.x;
 		newPos.y += offset*newRand.y;
 		Instantiate(enemy, newPos, Quaternion.identity);
-		mothershipsLeft--;
-		if(mothershipsLeft < 1)
-			Invoke ("Relocate", relocateDelay);
+		//mothershipsLeft--;
+		//if(mothershipsLeft < 1)
+		//	Invoke ("Relocate", relocateDelay);
 	}
 
 	void Relocate() {

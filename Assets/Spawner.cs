@@ -38,7 +38,7 @@ public class Spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-				if (Input.GetMouseButtonDown (1)) {
+				if (Input.GetMouseButtonDown (0) && Input.GetKey ("left ctrl")) {
 						Vector3 newPosition = Vector3.zero;
 						Vector3 mouse = Input.mousePosition;
 						mouse.z = 1000;
