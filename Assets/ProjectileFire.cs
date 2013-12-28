@@ -7,6 +7,8 @@ public class ProjectileFire : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		Physics2D.IgnoreLayerCollision (9, 9, true);
 		angle=(360-transform.rotation.eulerAngles.z)*Mathf.Deg2Rad;
 		Vector2 newVelocity=Vector2.zero;
 		float sin=Mathf.Sin (angle);
@@ -21,7 +23,7 @@ public class ProjectileFire : MonoBehaviour {
 	
 	}
 	void OnCollisionEnter2D(){
-		Physics2D.IgnoreLayerCollision (9, 9, true);
+
 				Destroy (gameObject);
 		}
 }

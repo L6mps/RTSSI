@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
 			Invoke ("addPopulation", 1);
 		}
 		if(population<=0){
+			population=0;
 			Instantiate (bigExplosion,transform.position,transform.rotation);
 			Example ();
 			Instantiate(endGame,transform.position,transform.rotation);

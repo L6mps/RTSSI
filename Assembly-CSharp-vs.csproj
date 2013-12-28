@@ -54,6 +54,7 @@
      <Compile Include="Assets\EnemySpawner.cs" />
      <Compile Include="Assets\MothershipBehaviour.cs" />
      <Compile Include="Assets\MothershipSpawner.cs" />
+     <Compile Include="Assets\PauseMenu.cs" />
      <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\PortalSpawner.cs" />
      <Compile Include="Assets\ProjectileFire.cs" />
