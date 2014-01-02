@@ -10,7 +10,7 @@ public class EndGame : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		survival=Player.getSurvival();
-		Time.timeScale=0;
+		//Time.timeScale=0;
 	
 	}
 	

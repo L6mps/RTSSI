@@ -24,14 +24,10 @@ public class Player : MonoBehaviour {
 		}
 		if(population<=0){
 			population=0;
-			Instantiate (bigExplosion,transform.position,transform.rotation);
-			Example ();
-			Instantiate(endGame,transform.position,transform.rotation);
+			Application.LoadLevel (2);
+			//Instantiate(endGame,transform.position,transform.rotation);
 		}
 
-	}
-	IEnumerator Example() {
-		yield return new WaitForSeconds(0.5F);
 	}
 	void addPopulation(){
 		population += (population / populationGrowth) * 0.1 * (double) Random.Range(5, 20);

@@ -30,7 +30,7 @@ public class CannonControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Spawner.getControlledCannon()==name){
+		if(Spawner.getControlledCannon()==transform.parent.name){
 			Vector3 objectPos=transform.position;
 			Vector3 mouse= Input.mousePosition;    
 			mouse.z=0;
