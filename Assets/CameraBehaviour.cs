@@ -39,10 +39,6 @@ public class CameraBehaviour : MonoBehaviour {
 				zoomed = true;
 				Vector3 mousePos1 = Input.mousePosition;
 				Vector3 mousePos = camera.ScreenToWorldPoint(mousePos1);
-				Debug.Log (mousePos.x + " "  + mousePos.y + "SCREENTOWORLD");
-				Debug.Log (camera.ViewportToWorldPoint(mousePos1).x+" "+camera.ViewportToWorldPoint(mousePos1).y+"VIEWPORTTOWORLD" );
-				Debug.Log (camera.ViewportToWorldPoint(mousePos1).x/(Screen.width)+" "+camera.ViewportToWorldPoint(mousePos1).y/(Screen.height)+"VIEWPORTTOWORLD" );
-
 				moveCamera (mousePos);
 				rotateCamera (mousePos);
 				moving = true;

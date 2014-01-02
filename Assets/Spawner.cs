@@ -42,7 +42,7 @@ public class Spawner : MonoBehaviour {
 						Vector3 newPosition = Vector3.zero;
 						Vector3 mouse = Input.mousePosition;
 						mouse.z = 1000;
-						newPosition = Camera.mainCamera.ScreenToWorldPoint (mouse);
+						newPosition = Camera.main.ScreenToWorldPoint (mouse);
 						newPosition.z = 0;
 						for (int i=0; i<10; i++) {
 								if (Mathf.Abs (newPosition.x - slots [i].transform.position.x) < 50 &&

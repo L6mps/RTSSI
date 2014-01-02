@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
 	
-	private bool paused = true;
+	private bool paused = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -11,11 +11,15 @@ public class PauseMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetButtonDown ("pause menu")) {
-			if(paused)
+		if(Input.GetKeyUp ("escape")) {
+			if(paused) {
 				paused = false;
-			else
+				Time.timeScale=1;
+			}
+			else {
 				paused = true;
+				Time.timeScale=0;
+			}
 		}
 	}
 	
@@ -27,17 +31,20 @@ public class PauseMenu : MonoBehaviour {
 			int yStep = Screen.height/8;
 
 			GUI.Box (new Rect(0,0,Screen.width, Screen.height), "Menu");
-			if(GUI.Button (new Rect (x1,y1, xLen, yStep/2), "New game")) {
+			if(GUI.Button (new Rect (x1,y1, xLen, yStep/2), "Return")) {
+				paused = false;
+				Time.timeScale=1;
+			}
+			if(GUI.Button (new Rect (x1,y1+yStep, xLen, yStep/2), "New game")) {
+				Application.LoadLevel (1);
+				Time.timeScale=1;
+			}
+			if(GUI.Button (new Rect (x1,y1+2*yStep, xLen, yStep/2), "Options")) {
 
 			}
-			if(GUI.Button (new Rect (x1,y1+yStep, xLen, yStep/2), "Options")) {
-
-			}
-			if(GUI.Button (new Rect (x1,y1+2*yStep, xLen, yStep/2), "Credits")) {
-
-			}
-			if(GUI.Button (new Rect (x1,y1+3*yStep, xLen, yStep/2), "Exit game")) {
-				
+			if(GUI.Button (new Rect (x1,y1+3*yStep, xLen, yStep/2), "Return to main menu")) {
+				Application.LoadLevel (0);
+				Time.timeScale=1;
 			}
 		}	
 	}

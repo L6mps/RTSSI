@@ -24,5 +24,8 @@ public class EndGame : MonoBehaviour {
 	}
 	void OnGUI(){
 		GUI.Box(new Rect(Screen.width/2-100,Screen.height/2-50,200,100),"GAME OVER: \n YOU SURVIVED FOR \n"+survival+" SECONDS");
-}
+		if(GUI.Button (new Rect(Screen.width/2-100,Screen.height/2+50,200,50), "Main menu")) {
+			Application.LoadLevel (0);
+		}
+	}
 }

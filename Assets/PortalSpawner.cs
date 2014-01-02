@@ -19,6 +19,10 @@ public class PortalSpawner : MonoBehaviour {
 			SpawnPortal();
 		}
 
+		if(Input.GetKeyUp ("q")) {
+			Application.LoadLevel (0);
+		}
+
 	}
 
 	void SpawnPortal() {

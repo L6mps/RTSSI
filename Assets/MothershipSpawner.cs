@@ -8,13 +8,13 @@ public class MothershipSpawner : MonoBehaviour {
 	public float relocateDelay = 60f;
 	//public int maxMotherships = 4;
 	//private int mothershipsLeft;
-	private int health=20;
+	//private int health=20;
 	public float speed=10;
-	private float radius;
+	//private float radius;
 
 	void Start() {
 		//mothershipsLeft = maxMotherships;
-		radius=Mathf.Sqrt (Mathf.Pow (transform.position.x,2)+Mathf.Pow (transform.position.y,2));
+		//radius=Mathf.Sqrt (Mathf.Pow (transform.position.x,2)+Mathf.Pow (transform.position.y,2));
 	}
 
 	void Update () {
