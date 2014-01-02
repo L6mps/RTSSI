@@ -16,6 +16,8 @@ public class CameraBehaviour : MonoBehaviour {
 	public float innerZoom = 300f;
 	private float zoomDifference;
 	private int currentSteps = 0;
+	private int screenSizeMin = Screen.width/8;
+	private int screenSizeMax;
 	
 	
 	void Start () {
@@ -23,26 +25,29 @@ public class CameraBehaviour : MonoBehaviour {
 		moving = false;
 		cameraStartPos = transform.position;
 		zoomDifference = outerZoom - innerZoom;
+		screenSizeMax = 7*screenSizeMin;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetMouseButtonUp(1)) {
-			if(zoomed) {
-				moving = true;
-				zoomed = false;
-				movingTowards = cameraStartPos;
-				cameraAngle = Quaternion.identity;
-				currentSteps = 0;
-			}
-			else {
-				zoomed = true;
-				Vector3 mousePos1 = Input.mousePosition;
-				Vector3 mousePos = camera.ScreenToWorldPoint(mousePos1);
-				moveCamera (mousePos);
-				rotateCamera (mousePos);
-				moving = true;
-				currentSteps = 0;
+			if(Input.mousePosition.x > screenSizeMin && Input.mousePosition.x < screenSizeMax) {
+				if(zoomed) {
+					moving = true;
+					zoomed = false;
+					movingTowards = cameraStartPos;
+					cameraAngle = Quaternion.identity;
+					currentSteps = 0;
+				}
+				else {
+					zoomed = true;
+					Vector3 mousePos1 = Input.mousePosition;
+					Vector3 mousePos = camera.ScreenToWorldPoint(mousePos1);
+					moveCamera (mousePos);
+					rotateCamera (mousePos);
+					moving = true;
+					currentSteps = 0;
+				}
 			}
 		}
 		if(moving) {
@@ -54,7 +59,7 @@ public class CameraBehaviour : MonoBehaviour {
 					camera.orthographicSize = innerZoom;
 			}
 			else {
-				if(camera.orthographicSize!= outerZoom)
+				if(camera.orthographicSize< outerZoom)
 					camera.orthographicSize = camera.orthographicSize + (zoomDifference/moveSteps);
 				else
 					camera.orthographicSize = outerZoom;
@@ -103,7 +108,6 @@ public class CameraBehaviour : MonoBehaviour {
 			else
 				angle = Mathf.Asin (sinAlpha) - (Mathf.PI/2);
 		}
-		Debug.Log(angle);
 		cameraAngle = Quaternion.AngleAxis(angle*Mathf.Rad2Deg, Vector3.forward);
 		rotatingStep = Mathf.Abs((Mathf.Rad2Deg*angle) / moveSteps);
 	}

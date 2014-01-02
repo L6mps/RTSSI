@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{AFD49650-1DDB-5E3D-DDB3-7A12078D0369}</ProjectGuid>
+	<ProjectGuid>{BC83B8D9-2773-C040-5ACA-3DC22D50AD93}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -61,6 +61,7 @@
      <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\PortalSpawner.cs" />
      <Compile Include="Assets\ProjectileFire.cs" />
+     <Compile Include="Assets\SideHUDLeft.cs" />
      <Compile Include="Assets\Spawner.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
