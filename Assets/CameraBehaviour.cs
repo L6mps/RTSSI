@@ -18,6 +18,9 @@ public class CameraBehaviour : MonoBehaviour {
 	private int currentSteps = 0;
 	private int screenSizeMin = Screen.width/8;
 	private int screenSizeMax;
+	private float angle;
+	public GameObject cross;
+	private GameObject cross2;
 	
 	
 	void Start () {
@@ -26,27 +29,62 @@ public class CameraBehaviour : MonoBehaviour {
 		cameraStartPos = transform.position;
 		zoomDifference = outerZoom - innerZoom;
 		screenSizeMax = 7*screenSizeMin;
+		cross2=(GameObject)Instantiate (cross,new Vector3(0,0,900),transform.rotation);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetMouseButtonUp(1)) {
-			if(Input.mousePosition.x > screenSizeMin && Input.mousePosition.x < screenSizeMax) {
-				if(zoomed) {
-					moving = true;
-					zoomed = false;
-					movingTowards = cameraStartPos;
-					cameraAngle = Quaternion.identity;
-					currentSteps = 0;
-				}
-				else {
-					zoomed = true;
-					Vector3 mousePos1 = Input.mousePosition;
-					Vector3 mousePos = camera.ScreenToWorldPoint(mousePos1);
-					moveCamera (mousePos);
-					rotateCamera (mousePos);
-					moving = true;
-					currentSteps = 0;
+		if(!moving) {
+			if(Input.GetKeyUp("1")) {
+				moveToSelectedCannon (0);
+			}
+			if(Input.GetKeyUp("2")) {
+				moveToSelectedCannon (1);
+			}
+			if(Input.GetKeyUp("3")) {
+				moveToSelectedCannon (2);
+			}
+			if(Input.GetKeyUp("4")) {
+				moveToSelectedCannon (3);
+			}
+			if(Input.GetKeyUp("5")) {
+				moveToSelectedCannon (4);
+			}
+			if(Input.GetKeyUp("6")) {
+				moveToSelectedCannon (5);
+			}
+			if(Input.GetKeyUp("7")) {
+				moveToSelectedCannon (6);
+			}
+			if(Input.GetKeyUp("8")) {
+				moveToSelectedCannon (7);
+			}
+			if(Input.GetKeyUp("9")) {
+				moveToSelectedCannon (8);
+			}
+			if(Input.GetKeyUp("0")) {
+				moveToSelectedCannon (9);
+			}
+			if(Input.GetMouseButtonUp(1)) {
+				if(Input.mousePosition.x > screenSizeMin && Input.mousePosition.x < screenSizeMax) {
+					if(zoomed) {
+						moving = true;
+						zoomed = false;
+						movingTowards = cameraStartPos;
+						cameraAngle = Quaternion.identity;
+						currentSteps = 0;
+						angle = 0;
+					}
+					else {
+						zoomed = true;
+						Vector3 mousePos1 = Input.mousePosition;
+						Vector3 mousePos = camera.ScreenToWorldPoint(mousePos1);
+						moveCamera (mousePos);
+						rotateCamera (mousePos);
+						moving = true;
+						currentSteps = 0;
+					}
 				}
 			}
 		}
@@ -66,6 +104,7 @@ public class CameraBehaviour : MonoBehaviour {
 			}
 			transform.position = Vector3.MoveTowards(transform.position, movingTowards, movingStep);
 			transform.rotation = Quaternion.RotateTowards(transform.rotation, cameraAngle, rotatingStep);
+			cross2.transform.rotation=transform.rotation;
 			if(currentSteps == moveSteps) {
 				moving = false;
 			}
@@ -84,17 +123,19 @@ public class CameraBehaviour : MonoBehaviour {
 								pos.x = -Mathf.Sqrt (cameraZoomedDist * cameraZoomedDist - pos.y * pos.y);
 						}
 		} catch (System.Exception ex) {
-			movingTowards.x = 0;
+			pos.x = 0;
 			if(pos.y>0)
-				movingTowards.y = cameraZoomedDist;
+				pos.y = cameraZoomedDist;
 			else
-				movingTowards.y = -cameraZoomedDist;
+				pos.y = -cameraZoomedDist;
 		}
 		movingTowards = pos;
-		movingStep = cameraZoomedDist / moveSteps;
+		float dist2 = Mathf.Sqrt((pos.x-transform.position.x)*(pos.x-transform.position.x) + (pos.y-transform.position.y)*(pos.y-transform.position.y));
+		movingStep = dist2 / moveSteps;
 	}
 	void rotateCamera(Vector3 pos) {
-		float angle = 0;
+		float prevAngle = angle;
+		angle = 0;
 		float sinAlpha = pos.y / Mathf.Sqrt (pos.x*pos.x + pos.y*pos.y);
 		if(pos.x<0) {
 			if(pos.y>0)
@@ -109,6 +150,20 @@ public class CameraBehaviour : MonoBehaviour {
 				angle = Mathf.Asin (sinAlpha) - (Mathf.PI/2);
 		}
 		cameraAngle = Quaternion.AngleAxis(angle*Mathf.Rad2Deg, Vector3.forward);
-		rotatingStep = Mathf.Abs((Mathf.Rad2Deg*angle) / moveSteps);
+		float angleDiff = Mathf.Abs(Mathf.Rad2Deg*angle-Mathf.Rad2Deg*prevAngle);
+		if(angleDiff > 180)
+			angleDiff = 360-angleDiff;
+		rotatingStep = angleDiff / moveSteps;
+	}
+
+	public void moveToSelectedCannon(int slot) {
+		Vector3 newPos = Spawner.getSlotPos(slot);
+		newPos.z = -1000;
+		moveCamera (newPos);
+		rotateCamera (newPos);
+		moving = true;
+		currentSteps = 0;
+		if(!zoomed)
+			zoomed=true;
 	}
 }

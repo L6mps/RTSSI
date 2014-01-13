@@ -34,5 +34,6 @@ public class PortalSpawner : MonoBehaviour {
 			Instantiate (portal, newPos, new Quaternion(0,0,0,0));
 		}
 		counter=counter*2;
+		Player.portalCount++;
 	}
 }

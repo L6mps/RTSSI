@@ -7,13 +7,19 @@ public class Player : MonoBehaviour {
 	public GameObject endGame;
 	public static float survival=0;
 	public GameObject bigExplosion;
+	public static int portalCount;
+	public static int mothershipCount;
+	public static int kamikazeCount;
+
 	public static float getSurvival(){
 		return survival;
 	}
 
 	// Use this for initialization
 	void Start () {
-	
+		portalCount = 0;
+		mothershipCount = 0;
+		kamikazeCount = 0;
 	}
 	
 	// Update is called once per frame
