@@ -49,11 +49,13 @@
      <Compile Include="Assets\BlackHoleBehaviour.cs" />
      <Compile Include="Assets\CameraBehaviour.cs" />
      <Compile Include="Assets\CannonControl.cs" />
+     <Compile Include="Assets\DestroyAfterEffect.cs" />
      <Compile Include="Assets\DestroyOnInvisible.cs" />
      <Compile Include="Assets\EndGame.cs" />
      <Compile Include="Assets\EnemyBehaviour.cs" />
      <Compile Include="Assets\EnemySpawner.cs" />
      <Compile Include="Assets\Enlarge.cs" />
+     <Compile Include="Assets\Example.cs" />
      <Compile Include="Assets\MainMenu.cs" />
      <Compile Include="Assets\MothershipBehaviour.cs" />
      <Compile Include="Assets\MothershipSpawner.cs" />
